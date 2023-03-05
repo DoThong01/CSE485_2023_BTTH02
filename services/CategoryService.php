@@ -26,10 +26,8 @@ class CategoryService{
                 $category = new Category($row['ma_tloai'], $row['ten_tloai']);
                 array_push($categorys,$category); //add category vào mảng
             }
-
             return $categorys;
         }
-
 
         public function addCategorySql(){
             
@@ -43,9 +41,7 @@ class CategoryService{
             $stmt = $conn->prepare($addnameCategorySql);
             $stmt->execute();
             // header("Location: index.php?controller=category");  
-        }
-
-        
+        }     
     }
 
 ?>

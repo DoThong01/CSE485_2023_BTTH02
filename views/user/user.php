@@ -1,9 +1,7 @@
 <?php
     require 'configs/include/headerAdmin.php';
-
+    
 ?>
-
-
 <?php
                 if(isset($_GET['error'])){
                 ?>
