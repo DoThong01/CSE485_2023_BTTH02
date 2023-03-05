@@ -1,15 +1,16 @@
 <?php
     include("services/UserService.php");
 
-    class LoginController{
+    class SignUpController{
         public function index(){
-            include("views/login/login.php");
+            include("views/login/signUp.php");
             
         }
 
-        public function processLogin(){
+        public function processSignUp(){
             $userService = new UserService();
-            $processLogin = $userService-> userLogin();
+            $processSignUpUser = $userService->signUpUser();
+
         }
       
     }

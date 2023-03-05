@@ -6,7 +6,6 @@
 
         public function getAllUser(){
             // Bước 01: Kết nối DB Server
-            //require db
             $conn = new DBConnection();
             // Bước 02: Truy vấn DL
             $showAllUserSql = "SELECT * FROM user order by ten_dnhap";
@@ -17,8 +16,6 @@
                 $user = new User($row['ten_dnhap'], $row['mat_khau'], $row['email'], $row['ngay_dki'], $row['admin']);
                 array_push($users,$user);
             }
-        
-            
             return $users;
         }
 
@@ -32,16 +29,13 @@
             $addUserSql = "INSERT INTO user(ten_dnhap,mat_khau,email,ngay_dki,admin) VALUES ('$txtUserName','$txtUserPass','$txtUserEmail',current_timestamp(), '$txtUserAdmin')";
             $stmt = $conn->getConnection()->prepare($addUserSql);
             if($stmt->execute()){
-                header("Location: index.php?controller=user&action=index");
-    
-              echo "OK";
-            }
-         
+                header("Location: index.php?controller=user&action=index");   
+                echo "OK";
+            } 
          }
 
         public function selectEditUser(){
             // Bước 01: Kết nối DB Server
-            //require db
             $conn = new DBConnection();
             // Bước 02: Truy vấn DL
             $getId = $_GET['id'];            
@@ -52,11 +46,9 @@
             $userWithId = $stmt->fetch();
             $user = new User($userWithId['ten_dnhap'], $userWithId['mat_khau'], $userWithId['email'], $userWithId['ngay_dki'], $userWithId['admin']);
             return $user;
-
         }
 
         public function processEditUser(){
- 
             $conn = new DBConnection();
             $userName = $_POST['txtUserName'];
             $password = $_POST['txtPasword'];
@@ -68,14 +60,10 @@
             if($stmt->execute()){
                 header("Location: index.php?controller=user&action=index");
             }
-
-            
-            
          }
 
         public function deleteUser(){
             // Bước 01: Kết nối DB Server
-            //require db
             $conn = new DBConnection();
             // Bước 02: Truy vấn DL
             $getId = $_GET['id'];
@@ -86,13 +74,10 @@
             if($stmt->execute()){
                 header("Location: index.php?controller=user&action=index");
             }
-            
-            
         }
 
         public function userLogin(){
             // Bước 01: Kết nối DB Server
-            //require db
             $conn = new DBConnection();
             // Bước 02: Truy vấn DL
             session_start();
@@ -123,7 +108,6 @@
         }
         public function userIsAdmin(){
             // Bước 01: Kết nối DB Server
-            //require db
             $conn = new DBConnection();
             // Bước 02: Truy vấn DL
             session_start();
@@ -168,33 +152,20 @@
                 $user = new User($row['ten_dnhap'], $row['mat_khau'], $row['email'], $row['ngay_dki'], $row['admin']);
                 array_push($users,$user);
             }
-                // if($row['ten_dnhap']==$txtUserNameSU){
-                //     $foundName = true; // trùng lặp đánh dấu true
-            //var_dump( $users);
-                // }
             foreach($users as $value) {
                 //echo $value->getTenDangNhap();
                 if ($value->getTenDangNhap() == $txtUserNameSU ) {
                     $foundName = true; // trùng lặp đánh dấu true
-                    break ; // thoát khỏi cả hai vòng lặp while và foreach
+                    break ; 
                 }
                 
                 if ($value->getEmail() == $txtEmailSU ) {
                     $foundEmail = true; // trùng lặp đánh dấu true
-                    break ; // thoát khỏi cả hai vòng lặp while và foreach
+                    break ; 
                 }
                 }
                 echo $foundName;
-                // foreach ($row['email'] as $key => $value) {
-                //     // echo $row[$key];
-                //     if ($value == $txtUserName ) {
-                //         $found = true; // trùng lặp đánh dấu true
-                //         break 2; // thoát khỏi cả hai vòng lặp while và foreach
-                //     }
-                // }
-            
-           
-
+ 
             if($foundName){                   
                 echo "<script>
                     alert('Tên đăng nhập đã tồn tại');
@@ -215,8 +186,7 @@
                     header("Location: index.php?controller=login&action=index");
                 }
                 
-                }
-           
+            }
         }
         }
         public function countArticle(){
@@ -251,9 +221,7 @@
             session_start();
             if(isset($_SESSION['user'])){
                 unset($_SESSION['user']);
-
             }
-
         }
     }
 
